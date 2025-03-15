@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheep Farm Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sheep Farm Management</h1>
+
+        <nav>
+            <button onclick="showSection('purchase')">Purchase Sheep</button>
+            <button onclick="showSection('sales')">Sell Sheep</button>
+            <button onclick="showSection('mortality')">Report Mortality</button>
+            <button onclick="showSection('sheepList')">Sheep Records</button>
+            <button onclick="showSection('inventory')">Sheep Inventory</button>
+        </nav>
+
+        <!-- Purchase Sheep -->
+        <div id="purchase" class="section active">
+            <h2>Purchase Sheep</h2>
+            <input type="text" id="sheepBreed" placeholder="Breed Name">
+            <input type="number" id="sheepPrice" placeholder="Purchase Price">
+            <input type="number" id="sheepWeight" placeholder="Weight at Purchase (kg)">
+            <button onclick="addSheep()">Add Sheep</button>
+        </div>
+
+        <!-- Sell Sheep -->
+        <div id="sales" class="section">
+            <h2>Sell Sheep</h2>
+            <select id="sellSheepId"></select>
+            <input type="number" id="livePricePerKg" placeholder="Live Price per kg">
+            <button onclick="sellSheep()">Sell Sheep</button>
+        </div>
+
+        <!-- Mortality Tracking -->
+        <div id="mortality" class="section">
+            <h2>Report Mortality</h2>
+            <select id="deadSheepId"></select>
+            <button onclick="removeDeadSheep()">Mark as Deceased</button>
+        </div>
+
+        <!-- Sheep List -->
+        <div id="sheepList" class="section">
+            <h2>Sheep Records</h2>
+            <ul id="sheepRecords"></ul>
+        </div>
+
+        <!-- Sheep Inventory Sheet -->
+        <div id="inventory" class="section">
+            <h2>Sheep Inventory Sheet</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Breed</th>
+                        <th>Purchase Date</th>
+                        <th>Purchase Price</th>
+                        <th>Initial Weight</th>
+                        <th>Last Recorded Weight</th>
+                        <th>Last Weight Update</th>
+                        <th>Weight at Selling</th>
+                        <th>Selling Price</th>
+                        <th>Selling Date</th>
+                        <th>Mortality Date</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryRecords"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
