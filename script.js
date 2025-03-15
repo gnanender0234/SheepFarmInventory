@@ -29,26 +29,47 @@ function generateSheepID(breed) {
 }
 
 // Add Sheep
-function addSheep() {
+// 🔹 Google Sheets API URL (Replace with your actual URL)
+const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxEXAMPLE1234567890/exec"; 
+
+async function addSheep() {
     const breed = document.getElementById('sheepBreed').value;
     const price = parseFloat(document.getElementById('sheepPrice').value);
     const weight = parseFloat(document.getElementById('sheepWeight').value);
 
     if (breed && !isNaN(price) && !isNaN(weight)) {
-        const id = generateSheepID(breed);
-        sheepRecords[id] = { 
-            breed, 
-            purchasePrice: price, 
-            purchaseWeight: weight, 
-            weights: [weight], 
-            sold: false, 
-            deceased: false, 
-            purchaseDate: new Date().toLocaleDateString(),
-            sellingDate: null,
-            mortalityDate: null,
-            sellPrice: null,
-            lastWeightUpdate: new Date().toLocaleDateString()
+        const sheepData = {
+            id: new Date().getTime(), // Unique ID for each sheep
+            breed,
+            price,
+            weight
         };
+
+        // 🔹 Send Data to Google Sheets API
+        try {
+            const response = await fetch(SHEET_API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(sheepData)
+            });
+
+            const result = await response.text();
+            alert("Sheep added successfully!");
+
+            // Clear input fields after successful submission
+            document.getElementById('sheepBreed').value = "";
+            document.getElementById('sheepPrice').value = "";
+            document.getElementById('sheepWeight').value = "";
+
+        } catch (error) {
+            console.error("Error saving to Google Sheets:", error);
+            alert("Failed to save sheep data. Please try again.");
+        }
+    } else {
+        alert("Please enter valid sheep details.");
+    }
+}
+
 
         updateAll();
         
