@@ -38,11 +38,36 @@ async function addSheep() {
 
     if (breed && !isNaN(price) && !isNaN(weight)) {
         const sheepData = {
-            id: new Date().getTime(), // Unique ID for each sheep
+            id: new Date().getTime(), // Unique ID
             breed,
             price,
             weight
         };
+
+        // 🔹 Send Data to Google Sheets API
+        try {
+            const response = await fetch(SHEET_API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(sheepData)
+            });
+
+            const result = await response.text();
+            alert("Sheep added successfully!");
+
+            // Clear input fields after successful submission
+            document.getElementById('sheepBreed').value = "";
+            document.getElementById('sheepPrice').value = "";
+            document.getElementById('sheepWeight').value = "";
+
+        } catch (error) {
+            console.error("Error saving to Google Sheets:", error);
+            alert("Failed to save sheep data. Please try again.");
+        }
+    } else {
+        alert("Please enter valid sheep details.");
+    }
+}
 
         // 🔹 Send Data to Google Sheets API
         try {
