@@ -29,8 +29,7 @@ function generateSheepID(breed) {
 }
 
 // Add Sheep
-// 🔹 Google Sheets API URL (Replace with your actual URL)
-const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxEXAMPLE1234567890/exec"; 
+const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxhOAj-K7IW-9k1F5m1JQVsoRnLfTcqXtjY5iHawRLKdfqznzhXBeAFrdAUeYr9OS8wxA/exec"; 
 
 async function addSheep() {
     const breed = document.getElementById('sheepBreed').value;
